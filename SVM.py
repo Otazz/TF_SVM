@@ -1,8 +1,10 @@
 import tensorflow as tf
 import numpy as np
 
+
+# Non-linear SVM with Gaussian Kernel
 class Model_NonLin(object):
-	def __init__(self, sess, X, y, c, gamma):
+	def __init__(self, sess, X, y, c=0, gamma=1):
 		self.sess = sess
 		self.X = X
 		self.y = y
@@ -116,8 +118,9 @@ class Model_NonLin(object):
 			f.write('%lf' % self.sess.run(self.gamma))
 
 
+# Linear SVM
 class Model_Lin(object):
-	def __init__(self, sess, X, y, c):
+	def __init__(self, sess, X, y, c=0):
 		self.sess = sess
 		self.X = X
 		self.y = y
@@ -198,9 +201,5 @@ class Model_Lin(object):
 		return eq/len(y)
 
 	def save(self):
-		#p = params(self.sess.run(self.A), self.sess.run(self.b), self.sess.run(self.Xk), self.sess.run(self.g))
 		np.savetxt('A.csv', self.sess.run(self.A), delimiter=',')
 		np.savetxt('b.csv', self.sess.run(self.b), delimiter=',')
-		#pickle.dump(p,open('model.p','wb'))
-		#saver = tf.train.Saver()
-		#saver.save(self.sess, './model')
